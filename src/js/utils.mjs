@@ -29,3 +29,13 @@ export function getParam(param) {
 
   return paramValue;
 }
+
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false){
+  //if clear == true clear out contents of the parent.
+  if (clear){
+    parentElement.innerHTML = "";
+  }
+
+  const htmlStrings = list.map(templateFn);
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
