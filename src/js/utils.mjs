@@ -40,3 +40,41 @@ export function renderListWithTemplate(
   if (clear) parentElement.innerHTML = "";
   parentElement.insertAdjacentHTML(position, list.map(templateFn).join(""));
 }
+
+// w3 functions | team activity ⬇️
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.innerHTML = template;
+  if (callback) {
+    callback(data);
+  }
+}
+
+export async function loadTemplate(path) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return await response.text();
+  } catch (error) {
+    console.error("Failed to load template:", error);
+  }
+}
+
+export async function loadHeaderFooter() {
+  const headerTemplate = await loadTemplate("/partials/header.html");
+  const footerTemplate = await loadTemplate("/partials/footer.html");
+
+  const headerElement = document.getElementById("main-header");
+  const footerElement = document.getElementById("main-footer");
+
+  if (headerTemplate) {
+    renderWithTemplate(headerTemplate, headerElement);
+  }
+
+  if (footerTemplate) {
+    renderWithTemplate(footerTemplate, footerElement);
+  }
+}
+

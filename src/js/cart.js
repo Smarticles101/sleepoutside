@@ -1,4 +1,5 @@
 import { getLocalStorage } from "./utils.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || []; // Default to an empty array if null/undefined
@@ -31,3 +32,8 @@ function cartItemTemplate(item) {
 }
 
 renderCartContents();
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadHeaderFooter();
+});
+
