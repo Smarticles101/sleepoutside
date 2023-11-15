@@ -51,3 +51,4 @@ export default class ProductDetails {
     document.getElementsByClassName("product-detail")[0].innerHTML = product;
   }
 }
+
