@@ -3,6 +3,7 @@ import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
+  <span class="removeBtn" data-id="${item.unique}">X</span>
     <img
       src="${item.Image}"
       alt="${item.Name}"
@@ -31,8 +32,30 @@ export default class ShoppingCart {
     document.querySelector(".product-list").innerHTML =
       cartItems.length > 0 ? htmlItems.join("") : "<p>Your cart is empty.</p>";
 
+    const buttons = document.querySelectorAll(".removeBtn");
+    // console.log(buttons);
+  
+    buttons.forEach(btn => {
+      btn.addEventListener("click",() => {
+        // console.log(btn.dataset["id"]); 
+        removeFromCart(btn.dataset["id"]);
+
+        function removeFromCart(itemId){
+          //const cartItems = getLocalStorage("so-cart");
+          const filtered = cartItems.filter(item => item.unique != itemId);
+        
+          setLocalStorage("so-cart", filtered);
+          
+          this.renderCart();
+        
+          return filtered
+        }
+      })
+    })
+
     const total = cartItems.reduce((a, prod) => prod.FinalPrice + a, 0);
     document.querySelector(".cart-total").innerHTML = `Total: $${total}`;
     document.querySelector(".cart-footer").classList.remove("hide");
   }
 }
+
