@@ -33,7 +33,11 @@ export default class ProductDetails {
   }
 
   renderProductDetails() {
-    let product = `
+      // Calculate the discount amount
+  const discountAmount = Math.round(this.product.SuggestedRetailPrice - this.product.FinalPrice);
+  const isDiscounted = discountAmount > 0;
+
+  let product = `
     <h3>${this.product.Brand.Name}</h3>
     <h2 class="divider">${this.product.NameWithoutBrand}</h2>
     <img
@@ -41,11 +45,14 @@ export default class ProductDetails {
       src="${this.product.Image}"
       alt="${this.product.NameWithoutBrand}"
     />
-    <p class="product-card__price">$${this.product.FinalPrice}</p>
+    <p class="product-card__price">
+      $${this.product.FinalPrice}
+      ${isDiscounted ? `<span class="discount">Now $${discountAmount} off</span>` : ""}
+    </p>
     <p class="product__color">${this.product.Colors[0].ColorName}</p>
     <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
     <div class="product-detail__add">
-      <button id="addToCart" data-id="344YJ">Add to Cart</button>
+      <button id="addToCart" data-id="${this.product.Id}">Add to Cart</button>
     </div>`;
 
     document.getElementsByClassName("product-detail")[0].innerHTML = product;
