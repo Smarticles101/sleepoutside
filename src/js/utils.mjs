@@ -22,59 +22,53 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
-export function getParam(param) {
+export function getParam(key) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const paramValue = urlParams.get(param);
+  const parameter = urlParams.get(key);
 
-  return paramValue;
+  return parameter
 }
 
-export function renderListWithTemplate(
-  templateFn,
-  parentElement,
-  list,
-  position = "afterbegin",
-  clear = false
-) {
-  if (clear) parentElement.innerHTML = "";
-  parentElement.insertAdjacentHTML(position, list.map(templateFn).join(""));
-}
+export function renderListWithTemplate(templateFn, parentElement, list, position="afterbegin", clear=false) {
+  const htmlStrings = list.map(templateFn);
 
-// w3 functions | team activity ⬇️
-
-export function renderWithTemplate(template, parentElement, data, callback) {
-  parentElement.innerHTML = template;
-  if (callback) {
-    callback(data);
+  if (clear) {
+    parentElement.innerHTML = "";
   }
+
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
 
-export async function loadTemplate(path) {
-  try {
-    const response = await fetch(path);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+export function displayCartCount() {
+  const cartItems = getLocalStorage('so-cart');
+  const cartCount = cartItems.length;
+
+  if (cartCount > 0) {
+    const html = `<p class="cart-count">${cartCount}</p>`
+
+    document.querySelector('.cart').innerHTML += html;
+  }
+  
+  return
+}
+
+export function capitalizeWords(input) {
+  // Split the input string into words
+  const words = input.split('-');
+
+  // Capitalize the first letter of each word
+  const capitalizedWords = words.map(word => {
+    // Check if the word is not empty
+    if (word.length > 0) {
+      return word.charAt(0).toUpperCase() + word.slice(1);
     }
-    return await response.text();
-  } catch (error) {
-    console.error("Failed to load template:", error);
-  }
+    // If the word is empty, return it as is
+    return word;
+  });
+
+  // Join the capitalized words back into a string
+  const result = capitalizedWords.join(' ');
+
+  return result;
 }
-
-export async function loadHeaderFooter() {
-  const headerTemplate = await loadTemplate("/partials/header.html");
-  const footerTemplate = await loadTemplate("/partials/footer.html");
-
-  const headerElement = document.getElementById("main-header");
-  const footerElement = document.getElementById("main-footer");
-
-  if (headerTemplate) {
-    renderWithTemplate(headerTemplate, headerElement);
-  }
-
-  if (footerTemplate) {
-    renderWithTemplate(footerTemplate, footerElement);
-  }
-}
-
