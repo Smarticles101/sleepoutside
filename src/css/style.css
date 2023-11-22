@@ -218,6 +218,12 @@ button {
 }
 
 
+@media screen and (min-width: 250px){
+  .product-card{
+    max-width: 7em;
+  } 
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
@@ -230,7 +236,23 @@ button {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
   }
+  .product-card{
+    max-width: 9em;
+  }
 }
+
+@media screen and (min-width: 1000px){
+  .product-card{
+    max-width: 10em;
+  }
+}
+
+@media screen and (min-width: 1200px){
+  .product-card{
+    max-width: 12em;
+  }
+}
+
 
 footer {
   font-size: var(--small-font);
