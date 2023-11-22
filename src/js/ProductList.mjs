@@ -2,7 +2,7 @@ import { renderListWithTemplate } from "./utils.mjs";
 
 let productCardTemplate = (product) =>
   `<li class="product-card">
-<a href="product_pages/?product=${product.Id}">
+<a href="/product_pages/?product=${product.Id}">
 <img
 src="${product.Images.PrimaryMedium}"
 alt="${product.Name}"
@@ -25,5 +25,7 @@ export default class ProductListing {
     const PRODUCT_LIST = await this.dataSource.getData(this.category);
 
     renderListWithTemplate(productCardTemplate, this.listElement, PRODUCT_LIST);
+
+    document.querySelector(".products h2").innerHTML = `Top Products: ${this.category}`;
   }
 }
