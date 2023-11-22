@@ -1,9 +1,9 @@
 import ShoppingCart from "./ShoppingCart.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 
-const cart = new ShoppingCart();
-cart.init();
-
 document.addEventListener("DOMContentLoaded", () => {
   loadHeaderFooter();
 });
+
+const cart = new ShoppingCart();
+cart.init();
