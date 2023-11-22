@@ -228,6 +228,77 @@ button {
   font-size: 0.7em;
 }
 
+/* Checkout Form Styling */
+#checkout-form {
+  background: #f3f3f3;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+#checkout-form label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 600;
+}
+
+#checkout-form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#checkout-form button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 12px;
+  background-color: rgb(168, 87, 29);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+#checkout-form button:hover {
+  background-color: rgb(129, 66, 21);
+}
+
+/* Order Summary Styling */
+aside.order-summary {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+aside.order-summary h3 {
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: 700;
+}
+
+aside.order-summary p {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #checkout-form input[type="text"], 
+  #checkout-form button {
+    width: 100%;
+  }
+}
+
+
 
 @media screen and (min-width: 250px){
   .product-card{
