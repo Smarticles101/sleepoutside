@@ -217,11 +217,10 @@ button {
   cursor: pointer; 
 }
 
-
 @media screen and (min-width: 250px){
   .product-card{
     max-width: 7em;
-  } 
+  }
 }
 
 @media screen and (min-width: 500px) {
@@ -236,23 +235,22 @@ button {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
   }
-  .product-card{
+  .product-card {
     max-width: 9em;
   }
 }
 
-@media screen and (min-width: 1000px){
-  .product-card{
+@media screen and (min-width: 1000px) {
+  .product-card {
     max-width: 10em;
   }
 }
 
-@media screen and (min-width: 1200px){
-  .product-card{
+@media screen and (min-width: 1200px) {
+  .product-card {
     max-width: 12em;
   }
 }
-
 
 footer {
   font-size: var(--small-font);
@@ -261,4 +259,19 @@ footer {
 
 .hide {
   display: none;
+}
+
+.product-categories {
+  display: flex;
+  justify-content: center;
+}
+
+.product-categories * {
+  width: 150px;
+}
+
+.product-categories a {
+  text-align: center;
+  text-decoration: none;
+  color: black;
 }

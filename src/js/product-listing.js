@@ -1,13 +1,14 @@
 import ProductData from "./ProductData.mjs";
 import ProductListing from "./ProductList.mjs";
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter, getParam } from "./utils.mjs";
 
-const PRODUCT_DATA = new ProductData("tents");
+const PRODUCT_DATA = new ProductData();
 const PRODUCT_LIST = new ProductListing(
-  "tents",
+  getParam("category"),
   PRODUCT_DATA,
-  document.getElementsByClassName("product-list")[0]
+  document.querySelector(".product-list")
 );
+
 PRODUCT_LIST.init();
 
 document.addEventListener("DOMContentLoaded", () => {

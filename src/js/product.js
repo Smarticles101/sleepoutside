@@ -11,6 +11,5 @@ const product = new ProductDetails(productId, dataSource);
 product.init();
 
 document.addEventListener("DOMContentLoaded", () => {
-    loadHeaderFooter();
-  });
-  
+  loadHeaderFooter();
+});
