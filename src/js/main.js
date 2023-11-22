@@ -1,3 +1,5 @@
-import { displayCartCount } from "./utils.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
 
-displayCartCount();
+document.addEventListener("DOMContentLoaded", () => {
+  loadHeaderFooter();
+});

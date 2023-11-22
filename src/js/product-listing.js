@@ -1,16 +1,16 @@
 import ProductData from "./ProductData.mjs";
 import ProductListing from "./ProductList.mjs";
-import { getParam, capitalizeWords } from "./utils.mjs";
+import { loadHeaderFooter, getParam } from "./utils.mjs";
 
-const category = getParam('category');
+const PRODUCT_DATA = new ProductData();
+const PRODUCT_LIST = new ProductListing(
+  getParam("category"),
+  PRODUCT_DATA,
+  document.querySelector(".product-list")
+);
 
-const displayCategory = capitalizeWords(category);
-const categoryDisplayElement = document.querySelector('.products-category');
-categoryDisplayElement.textContent = `Top Products: ${displayCategory}`;
-document.title = `Top Products: ${displayCategory}`;
+PRODUCT_LIST.init();
 
-const dataSource = new ProductData();
-const listElement = document.querySelector(".product-list");
-
-const prodList = new ProductListing(category, dataSource, listElement);
-prodList.init();
+document.addEventListener("DOMContentLoaded", () => {
+  loadHeaderFooter();
+});
