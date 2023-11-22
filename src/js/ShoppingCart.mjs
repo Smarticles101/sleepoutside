@@ -53,11 +53,11 @@ function removeFromCart(itemId){
   const filtered = cartItems.filter(item => item.unique != itemId);
 
   setLocalStorage("so-cart", filtered);
-  renderCart();
+  //renderCart();
 
   return filtered
 }
 
-renderCart()
+//renderCart()
 
 
