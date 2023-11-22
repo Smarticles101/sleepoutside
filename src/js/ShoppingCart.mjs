@@ -52,7 +52,7 @@ export default class ShoppingCart {
         }
       })
     })
-
+    
     const total = cartItems.reduce((a, prod) => prod.FinalPrice + a, 0);
     document.querySelector(".cart-total").innerHTML = `Total: $${total}`;
     document.querySelector(".cart-footer").classList.remove("hide");

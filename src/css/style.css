@@ -217,6 +217,18 @@ button {
   cursor: pointer; 
 }
 
+.cart-count {
+  position: absolute;
+  top: 5px;
+  right: -5px; 
+  background-color: rgb(255, 102, 0); 
+  color: white;
+  border-radius: 50%;
+  padding: 2px 5px;
+  font-size: 0.7em;
+}
+
+
 @media screen and (min-width: 250px){
   .product-card{
     max-width: 7em;

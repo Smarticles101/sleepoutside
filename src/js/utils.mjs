@@ -62,6 +62,17 @@ export async function loadTemplate(path) {
   }
 }
 
+export function updateCartItemCount() {
+  const cartCountElement = document.getElementById("cart-count");
+  if (cartCountElement) {
+    const cartItems = getLocalStorage("so-cart") || [];
+    const itemCount = cartItems.length;
+    cartCountElement.textContent = itemCount;
+  } else {
+    console.log("Cart count element not found");
+  }
+}
+
 export async function loadHeaderFooter() {
   const headerTemplate = await loadTemplate("/partials/header.html");
   const footerTemplate = await loadTemplate("/partials/footer.html");
@@ -71,10 +82,10 @@ export async function loadHeaderFooter() {
 
   if (headerTemplate) {
     renderWithTemplate(headerTemplate, headerElement);
+    updateCartItemCount(); 
   }
 
   if (footerTemplate) {
     renderWithTemplate(footerTemplate, footerElement);
   }
 }
-
