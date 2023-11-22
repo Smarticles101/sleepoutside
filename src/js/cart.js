@@ -5,7 +5,5 @@ document.addEventListener("DOMContentLoaded", () => {
   loadHeaderFooter();
 });
 
-
 const cart = new ShoppingCart();
 cart.init();
-

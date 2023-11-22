@@ -1,8 +1,8 @@
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductListing from "./ProductList.mjs";
 import { loadHeaderFooter, getParam } from "./utils.mjs";
 
-const PRODUCT_DATA = new ProductData();
+const PRODUCT_DATA = new ExternalServices();
 const PRODUCT_LIST = new ProductListing(
   getParam("category"),
   PRODUCT_DATA,
