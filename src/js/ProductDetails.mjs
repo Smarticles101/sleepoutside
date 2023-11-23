@@ -28,6 +28,7 @@ export default class ProductDetails {
       cart = [];
     }
 
+    this.product.unique = Math.random()
     cart.push(this.product);
     setLocalStorage("so-cart", cart);
   }

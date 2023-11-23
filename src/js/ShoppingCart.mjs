@@ -26,6 +26,18 @@ export default class ShoppingCart {
     this.renderCart();
   }
 
+  removeFromCart(itemId){
+    const cartItems = getLocalStorage("so-cart");
+    const filtered = cartItems.filter(item => item.unique != itemId);
+  
+    setLocalStorage("so-cart", filtered);
+    
+    this.renderCart();
+  
+    return filtered
+  }
+
+
   renderCart() {
     const cartItems = getLocalStorage("so-cart") || []; // Default to an empty array if null/undefined
     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
@@ -38,24 +50,15 @@ export default class ShoppingCart {
     buttons.forEach(btn => {
       btn.addEventListener("click",() => {
         // console.log(btn.dataset["id"]); 
-        removeFromCart(btn.dataset["id"]);
-
-        function removeFromCart(itemId){
-          //const cartItems = getLocalStorage("so-cart");
-          const filtered = cartItems.filter(item => item.unique != itemId);
-        
-          setLocalStorage("so-cart", filtered);
-          
-          this.renderCart();
-        
-          return filtered
-        }
+        this.removeFromCart(btn.dataset["id"]);
       })
-    })
+    
+
     
     const total = cartItems.reduce((a, prod) => prod.FinalPrice + a, 0);
     document.querySelector(".cart-total").innerHTML = `Total: $${total}`;
     document.querySelector(".cart-footer").classList.remove("hide");
   }
+    )}
 }
 
