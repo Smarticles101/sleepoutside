@@ -3,7 +3,7 @@ import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
-  <span class="removeBtn" id=${item.unique}>X</span>
+  <span class="removeBtn" data-id=${item.unique}>X</span>
     <img
       src="${item.Image}"
       alt="${item.Name}"
@@ -26,6 +26,16 @@ export default class ShoppingCart {
     this.renderCart();
   }
 
+  removeFromCart(itemId){
+    const cartItems = getLocalStorage("so-cart");
+    const filtered = cartItems.filter(item => item.unique != itemId);
+  
+    setLocalStorage("so-cart", filtered);
+    this.renderCart();
+  
+    return filtered
+  }
+
   renderCart() {
     const cartItems = getLocalStorage("so-cart") || []; // Default to an empty array if null/undefined
     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
@@ -42,21 +52,21 @@ export default class ShoppingCart {
     buttons.forEach(btn => {
       btn.addEventListener("click",() => {
         // console.log(btn.dataset["id"]); 
-        removeFromCart(btn.dataset["id"]);
+        this.removeFromCart(btn.dataset["id"]);
       })
     })
   }
 }
 
-function removeFromCart(itemId){
-  const cartItems = getLocalStorage("so-cart");
-  const filtered = cartItems.filter(item => item.unique != itemId);
+  // function removeFromCart(itemId){
+  //   const cartItems = getLocalStorage("so-cart");
+  //   const filtered = cartItems.filter(item => item.unique != itemId);
 
-  setLocalStorage("so-cart", filtered);
-  //renderCart();
+  //   setLocalStorage("so-cart", filtered);
+  //   renderCart();
 
-  return filtered
-}
+  //   return filtered
+  // }
 
 //renderCart()
 
