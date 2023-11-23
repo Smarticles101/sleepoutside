@@ -44,6 +44,21 @@ export default class ShoppingCart {
     document.querySelector(".product-list").innerHTML =
       cartItems.length > 0 ? htmlItems.join("") : "<p>Your cart is empty.</p>";
 
+      if (cartItems.length > 0) {
+        const checkoutButton = document.createElement("button");
+        checkoutButton.textContent = "Go to Checkout";
+        checkoutButton.classList.add("checkout-button");
+      
+        // Add an event listener to the button
+        checkoutButton.addEventListener("click", () => {
+          // Redirect to the desired URL
+          window.location.href = "/checkout/index.html"; // Replace with your desired URL
+        });
+      
+        document.querySelector(".cart-footer").appendChild(checkoutButton);
+      }
+      
+
     const buttons = document.querySelectorAll(".removeBtn");
     // console.log(buttons);
   
@@ -61,4 +76,7 @@ export default class ShoppingCart {
   }
     )}
 }
+
+
+
 
