@@ -45,19 +45,22 @@ export default class checkOrderSummary {
     this.calculateShipping();
     this.calculateTax();
 
-    document
-      .querySelector("#checkout-form .checkout-button")
-      .addEventListener("click", (e) => {
-        e.preventDefault();
-        let form = formDataToJSON(document.forms[0]);
-
+    document.querySelector("#checkout-form .checkout-button").addEventListener("click", (e) => {
+      e.preventDefault();
+      const formElement = document.forms[0];
+      const isValid = formElement.checkValidity();
+      formElement.reportValidity();
+  
+      if (isValid) {
+        let form = formDataToJSON(formElement);
+  
         form = {
           orderDate: Date.now(),
           fname: form["first-name"],
           lname: form["last-name"],
           cardNumber: form["cc-number"],
           expiration: form["exp-date"],
-          zip: ["zip-code"],
+          zip: form["zip-code"],
           street: form["street-address"],
           city: form["city"],
           state: form["state"],
@@ -67,9 +70,10 @@ export default class checkOrderSummary {
           shipping: this.shipping,
           tax: this.tax,
         };
-
+  
         this.checkout(form);
-      });
+      }
+    });
   }
 
   addEventListeners() {
@@ -123,18 +127,34 @@ export default class checkOrderSummary {
   }
 
   async checkout(form) {
-    // build the data object from the calculated fields, the items in the cart, and the information entered into the form
-    console.log(form);
-    // call the checkout method in our ExternalServices module and send it our data object.
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(form)
+    try {
+      // Build the data object from the calculated fields, the items in the cart, and the information entered into the form
+      console.log(form);
+      // Call the checkout method in our ExternalServices module and send it our data object.
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(form)
+      };
+      const response = await fetch(baseURL + "checkout", options);
+      const data = await response.json();
+      if (!response.ok) {
+        throw { name: "servicesError", message: data };
+      }
+      // Handle successful checkout here, if needed
+    } catch (err) {
+      // Error handling
+      if (err.name === "servicesError") {
+        // Handle the custom error
+        console.error("Checkout error:", err.message);
+        // Display an error message to the user, etc.
+      } else {
+        // Handle other types of errors
+        console.error("An unexpected error occurred:", err);
+      }
     }
-    fetch(baseURL + "checkout", options);
-
-        
   }
+  
 }
