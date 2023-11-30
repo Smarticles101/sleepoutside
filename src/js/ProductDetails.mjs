@@ -28,8 +28,15 @@ export default class ProductDetails {
       cart = [];
     }
 
-    this.product.unique = Math.random()
-    cart.push(this.product);
+    let ind = cart.findIndex(c => c.Id === this.product.Id);
+
+    if (ind === -1) {
+      this.product.unique = Math.random()
+      cart.push(this.product);
+    } else {
+      if (cart[ind].qty === undefined) cart[ind].qty = 1;
+      cart[ind].qty++;
+    }
     setLocalStorage("so-cart", cart);
   }
 

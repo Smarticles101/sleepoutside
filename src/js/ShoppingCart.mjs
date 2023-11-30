@@ -13,7 +13,7 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
+  <p class="cart-card__quantity">qty: ${item.qty || 1}</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`;
 
@@ -70,7 +70,7 @@ export default class ShoppingCart {
     
 
     
-    const total = cartItems.reduce((a, prod) => prod.FinalPrice + a, 0);
+    const total = cartItems.reduce((a, prod) => prod.FinalPrice * (prod.qty || 1) + a, 0);
     document.querySelector(".cart-total").innerHTML = `Total: $${total}`;
     document.querySelector(".cart-footer").classList.remove("hide");
   }
