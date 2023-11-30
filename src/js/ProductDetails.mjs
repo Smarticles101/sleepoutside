@@ -23,6 +23,7 @@ export default class ProductDetails {
   }
 
   addToCart() {
+    document.querySelector(".cart").classList.add("bounce");
     let cart = getLocalStorage("so-cart");
     if (cart === null || !Array.isArray(cart)) {
       cart = [];
